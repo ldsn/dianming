@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.8, created on 2014-08-13 19:34:47
+<?php /* Smarty version Smarty-3.0.8, created on 2014-08-14 01:47:09
          compiled from "D:\phpStudy\WWW\dianming/tpl\reply.html" */ ?>
-<?php /*%%SmartyHeaderCode:884553eb4d57ce74a3-15051962%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:127453eba49d6243f7-63233521%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '34238457bd89d8b9765f539d3a5f995278b2aa95' => 
     array (
       0 => 'D:\\phpStudy\\WWW\\dianming/tpl\\reply.html',
-      1 => 1407929685,
+      1 => 1407946946,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '884553eb4d57ce74a3-15051962',
+  'nocache_hash' => '127453eba49d6243f7-63233521',
   'function' => 
   array (
   ),
@@ -21,6 +21,7 @@ $_smarty_tpl->decodeProperties(array (
 <html>
 <head>
 <meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" > 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <script type="text/javascript" src="./tpl/js/jquery-1.11.1.min.js"></script>
 <title>点名</title>
@@ -30,10 +31,9 @@ body{
 background:url(./tpl/images/bg1.png)
 }
 #all{width:auto; display:block;}
-.content{width:auto; height:200px;}
 .c-warp{width:300px; height:200px; margin:0 auto; overflow:hidden;}
 .c-in{ height:200px;}
-.c-in-ul-li{width:300px; height:200px; text-align:center; float:left;}
+.c-in-ul-li{width:300px; height:200px; text-align:center; float:left;background:url(./tpl/images/aa.jpg)}
 .button{width:100px; margin:0 auto; border-radius:5px; background:#CCCCCC; height:40px; text-align:center; font-weight:bold; line-height:40px; margin-top:60px;}
 .button>a{text-decoration:none;}
 .button:hover{background:#0099CC;}
@@ -62,7 +62,7 @@ border: none;
 border-bottom: 2px solid #ccc;
 outline: none;
 padding: 0 10px;
-width: 273px;
+width: 250px;
 margin-top: 10px;
 background: none;
 color: #fff;
@@ -80,7 +80,7 @@ color: #fff;
 font-weight: bold;
 top: 160px;
 }
-.re{position:relative;background:url(./tpl/images/aa.jpg)}
+.re{position:relative;}
 .next {
     right: 10px;
 }
@@ -94,6 +94,12 @@ border-radius: 43px;
 margin: 0 auto;
 color: #fff;
 font-weight: bold;
+}
+.tcount {
+position: absolute;
+top: 170px;
+left: 99px;
+color: #B1B1B1;
 }
 </style>
 </head>
@@ -119,7 +125,7 @@ if ($_smarty_tpl->_count($_from) > 0){
 </h3>
 			      <input type="text" name="the[<?php echo $_smarty_tpl->tpl_vars['a']->value['qid'];?>
 ]" class="c-f-input" placeholder="填写答案"/>
-			   </li>	
+			   </li>
 			   <?php }} ?>
 			   
 			  <li class="c-in-ul-li">
@@ -129,6 +135,7 @@ if ($_smarty_tpl->_count($_from) > 0){
 			  </li>
 			<div class="pre">上一题</div>
 			<div class="next">下一题</div>
+			<div class="tcount">第<span class="now"></span>题 共<span class="all"></span>题</div>
 		  </ul>
 			  </form>
 		  </div>
@@ -143,11 +150,34 @@ if ($_smarty_tpl->_count($_from) > 0){
 <script>
 $(document).ready(function(){
 var g=$('.c-in-ul-li').length;
+var all=g-1;
+$('.all').html(all);
+$('.now').html('1');
 var li_width=$('.c-in-ul-li').width();
 var width=g*li_width;
 $('.c-in').width(width);
 var l_width = width - li_width;
 var dd=false;
+var p=0;
+var input=$('.c-f-input');
+input[0].focus();
+
+
+$(document).keydown(function(event){
+	if(event.keyCode == 13){
+	if(p==all){
+		ti.submit();
+	}else if(p<all){
+			$('.next').click();
+	}
+	}
+	if(event.keyCode == 9){
+		$('.next').click();
+		return false;
+	}
+})
+
+
 $('.next').click(function(){
 
 		if(parseInt($('.c-in-ul').css('margin-left'))==-l_width){
@@ -160,6 +190,11 @@ $('.next').click(function(){
 		
 	   $('.c-in-ul').animate({marginLeft:'-=300px'},function(){
 			dd=false;
+			p++;
+			$(input[p]).focus();
+			if(p<all){
+				$('.now').html(p+1);
+			}
 	   })
 
 	});
@@ -175,7 +210,12 @@ $('.pre').click(function(){
 	
    $('.c-in-ul').animate({marginLeft:'+=300px'},function(){
    	
-	dd=false;
+		dd=false;
+		p--;
+		$(input[p]).focus();
+			if(p<all){
+				$('.now').html(p+1);
+			}
    })
 })
 });

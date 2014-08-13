@@ -1,4 +1,5 @@
 <?php
-require_once("../API/qqConnectAPI.php");
+require_once("../../API/qqConnectAPI.php");
 $qc = new QC();
-echo "<script>window.opener=null;window.open('','_self');window.close();</script>";
+echo $qc->qq_callback();
+echo $qc->get_openid();
