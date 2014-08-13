@@ -20,26 +20,22 @@ class main extends spController
 		}
 		
 		function insert(){
-		 session_start();
 		$answer=spClass('answer');
 		$question=spClass('question');
 		$main1=spClass('main1');
 		$quest=$question->findAll();
 		$aid=$this->spArgs('aid');
         $a=$this->spArgs('the');
-		 $_SESSION['aid']=$aid;
 		foreach ($a as $key => $value ){
-			echo $key ."  " .$value;
 			$arow=array(
 			'qid'=>$key,
 			'aid'=>$aid,
 			'content'=>$value,
-			
 			);
 			$relt=$main1->create($arow);
 			
 		}
-		$this->success('点名完毕 转到查看', spUrl('main', 'show'));
+		$this->jump(spUrl('main', 'show').'&aid='.$aid);
 	   
 		
 		
@@ -47,10 +43,11 @@ class main extends spController
         function show(){
 		$main1=spClass('main1');
 		$question=spClass('question');
-		$aid=$_SESSION['aid'];
+		$aid=$this->spArgs('aid');
+		$status=spClass('answer')->find(array('aid'=>$aid));
+		$this->status=$status['status'];
 		$conditions=array(
 		  'aid'=>$aid,
-		
 		);
 		$result=$main1->findAll($conditions);
 		$this->data=$result;
