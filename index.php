@@ -3,10 +3,10 @@ define("APP_PATH",dirname(__FILE__));
 define("SP_PATH",dirname(__FILE__).'/SpeedPHP');
 $spConfig = array(
 "db" => array(
-		'host' => 'localhost',
-		'login' => 'root',
-		'password' => '8641683',
-		'database' => 'dianming',
+		'host' => '10.4.12.46',
+		'login' => 'ugst1wEhJ99Ch',
+		'password' => 'pi2vSDkqiqid8',
+		'database' => 'd436110b7edf84239ac2831956d95e1ba',
 		),
 'view' => array(
 		'enabled' => TRUE, // 开启视图
