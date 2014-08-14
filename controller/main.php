@@ -2,8 +2,7 @@
 class main extends spController
 { //主界面循环出所有数据
 	function index(){
-		
-		$this->display('reply.html');
+		$this->jump(spUrl('main','in'));
 	}
 	function in(){
 		$q=spClass('question');
