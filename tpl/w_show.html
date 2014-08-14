@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" > 
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta charset="utf-8"/>
+<title>爬黑板</title>
+<style>
+
+*{margin:0px;padding:0px; list-style:none;text-decoration: none;}
+body{
+background:url(./tpl/images/bg1.png)
+}
+#all{width:auto; display:block;}
+.c-warp{width:300px; height:200px; margin:0 auto; overflow:hidden;}
+.c-show-ul{
+background: url(./tpl/images/aa.jpg);
+padding: 10px 20px;
+color: #fff;
+line-height: 30px;
+}
+.footer {
+text-align: center;
+font-size: 14px;
+color: #666666;
+background: #fff;
+width:300px;
+margin: 0 auto;
+}
+.tr{
+width:300px;
+margin: 0 auto;
+}
+.share {
+font-weight: bold;
+text-align: center;
+font-size: 20px;
+}
+.tr .open{
+display: block;
+background: #000;
+width: 135px;
+line-height: 41px;
+text-align: center;
+color: #fff;
+font-weight: bold;
+border-radius: 40px;
+margin: 0 auto;
+box-shadow: 0px 0px 18px 3px rgba(177, 123, 123, 0.51);
+}
+.tr .open:hover {
+background: #030050;
+}
+</style>
+
+</head>
+<body>
+		 <{if $status == 0}>
+		<img src="./tpl/images/share1.png" style="position: absolute;width: 100%;" />
+		<{/if}>
+		<div class="tr">
+		  <ul class="c-show-ul"> 
+		 <{if $status == 1}>
+		我点了你的名字，你也要完完整整的填写一份，并且@10位好朋友哦，一定要@我哦。<br>
+		<a href="<{spUrl c=main a=w_in}>" class="open">开始爬黑板</a>
+		 <{/if}>
+		 
+		  </li>
+	           <{foreach from=$getout item=a}>
+			   <li class="c-in-ul-li"><{$a.title}> : <{$a.content}></li>
+			   <{/foreach}>
+			   
+		 <{if $status == 1}>
+			  <li class="c-in-ul-li">
+		<a href="<{spUrl c=main a=w_in}>" class="open">开始爬黑板</a></li>
+		<{/if}>
+		  </ul>
+		  
+		</div>
+	<div class="footer">
+	&copy; 2011-2014 LDSN.<a href="http://www.ldustu.com" target="_blank">鲁大学生网</a>
+	<script src="http://s19.cnzz.com/stat.php?id=1253022913&web_id=1253022913" language="JavaScript"></script></div>
+
+</div>
+
+
+<script>
+var imgUrl = 'http://heiban.sturgeon.mopaas.com/tpl/images/share.jpg';//这里是分享的时候的那个图片
+var lineLink = location.href;//这个是分享的网址
+var descContent = "这个操作的介绍，没发现他有啥用";
+var shareTitle = '<{$name}>邀请你来爬黑板，只传递给最好的朋友哦~';
+var appid = 'wx3bcd96e847fea130';  //这里写开发者接口里的appid
+function shareFriend() {
+    WeixinJSBridge.invoke('sendAppMessage',{
+                            "appid": appid,
+                            "img_url": imgUrl,
+                            "img_width": "640",
+                            "img_height": "640",
+                            "link": lineLink,
+                            "desc": descContent,
+                            "title": shareTitle
+                            }, function(res) {
+                            _report('send_msg', res.err_msg);
+                            })
+}
+function shareTimeline() {
+    WeixinJSBridge.invoke('shareTimeline',{
+                            "img_url": imgUrl,
+                            "img_width": "640",
+                            "img_height": "640",
+                            "link": lineLink,
+                            "desc": descContent,
+                            "title": shareTitle
+                            }, function(res) {
+                            _report('timeline', res.err_msg);
+                            });
+}
+function shareWeibo() {
+    WeixinJSBridge.invoke('shareWeibo',{
+                            "content": descContent,
+                            "url": lineLink,
+                            }, function(res) {
+                            _report('weibo', res.err_msg);
+                            });
+}
+// 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        // 发送给好友
+        WeixinJSBridge.on('menu:share:appmessage', function(argv){
+            shareFriend();
+			location.href='<{spUrl c=main a=w_guanzhu}>';
+            });
+        // 分享到朋友圈
+        WeixinJSBridge.on('menu:share:timeline', function(argv){
+            shareTimeline();
+			location.href='<{spUrl c=main a=w_guanzhu}>';
+            });
+        // 分享到微博
+        WeixinJSBridge.on('menu:share:weibo', function(argv){
+            shareWeibo();
+			location.href='<{spUrl c=main a=w_guanzhu}>';
+            });
+        }, false);
+</script>
+</body>
+</html>
