@@ -56,9 +56,11 @@ class main extends spController
 	  foreach($result as $value){
 	               $condition1=array( 'qid'=>$value['qid']);
 	              $question1=$question->find($condition1);
+				  if($question1){
 	  $data=array('title'=>$question1['title'],'content'=>$value['content']);
 	  $info[$i]=$data;
 		$i++;
+	  }
 		}
 	
 		$this->getout=$info;
