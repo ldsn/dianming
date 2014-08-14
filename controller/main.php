@@ -62,6 +62,10 @@ class main extends spController
 		}
 	
 		$this->getout=$info;
+		
+		
+		$nm=$main1->find(array('aid'=>$aid,'qid'=>1));
+		$this->name=$nm['content'];
 		$this->display('show.html');
 		}
 		function one(){

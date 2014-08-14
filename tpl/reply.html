@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" > 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <script type="text/javascript" src="./tpl/js/jquery-1.11.1.min.js"></script>
-<title>点名</title>
+<title>爬黑板</title>
 <style>
 *{margin:0px;padding:0px; list-style:none;text-decoration: none;}
 body{
@@ -81,6 +81,12 @@ position: absolute;
 top: 170px;
 left: 99px;
 color: #B1B1B1;
+}.count {
+position: absolute;
+top: 139px;
+right: 12px;
+color: #ccc;
+font-size: 13px;
 }
 </style>
 </head>
@@ -106,6 +112,7 @@ color: #B1B1B1;
 						完成提交
 					</a>
 			  </li>
+			<div class="count">你是第<{$aid}>个爬黑板的人</div>
 			<div class="pre">上一题</div>
 			<div class="next">下一题</div>
 			<div class="tcount">第<span class="now"></span>题 共<span class="all"></span>题</div>
