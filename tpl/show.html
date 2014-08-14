@@ -5,12 +5,7 @@
 <meta charset="utf-8"/>
 <title>传递黑板</title>
 <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101146020" data-redirecturi="http://game.ldustu.com/dm/index.php?c=main&a=one" charset="utf-8"></script>
-<span id="qqLoginBtn"></span>
-<script type="text/javascript">
-QC.Login({
-       btnId:"qqLoginBtn"    //插入按钮的节点id
-});
-</script>
+
 <style>
 
 *{margin:0px;padding:0px; list-style:none;text-decoration: none;}
@@ -51,7 +46,12 @@ font-size: 20px;
 		 <{if status == 0}>
 		  <li class="c-in-ul-li">
 				<div class="share">把它传递下去<br/>@10位你最好的朋友<br/>别忘记@传给你的人哦~<br/>
-        <a href="#" onclick='toQzoneLogin()'><img src="include/login.png"></a>
+       <span id="qqLoginBtn"></span>
+<script type="text/javascript">
+QC.Login({
+       btnId:"qqLoginBtn"    //插入按钮的节点id
+});
+</script>
 				</div>
 		 <{/if}>
 		  </li>
