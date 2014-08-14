@@ -45,6 +45,7 @@ class main extends spController
 		$aid=$this->spArgs('aid');
 		$status=spClass('answer')->find(array('aid'=>$aid));
 		$this->status=$status['status'];
+		spClass('answer')->update(array('aid'=>$aid),array('status'=>1));
 		$conditions=array(
 		  'aid'=>$aid,
 		);
