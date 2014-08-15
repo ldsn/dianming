@@ -87,7 +87,7 @@ background: #030050;
 <script>
 var imgUrl = 'http://heiban.sturgeon.mopaas.com/tpl/images/share.jpg';//这里是分享的时候的那个图片
 var lineLink = location.href;//这个是分享的网址
-var descContent = "这个操作的介绍，没发现他有啥用";
+var descContent = "快来爬黑板吧，一定要回答完所有的问题哦~";
 var shareTitle = '<{$name}>邀请你来爬黑板，只传递给最好的朋友哦~';
 var appid = 'wx3bcd96e847fea130';  //这里写开发者接口里的appid
 function shareFriend() {
@@ -101,6 +101,7 @@ function shareFriend() {
                             "title": shareTitle
                             }, function(res) {
                             _report('send_msg', res.err_msg);
+							location.href='http://mp.weixin.qq.com/s?__biz=MjM5NzE5MDIyMQ==&mid=200446831&idx=1&sn=a745b72b64cca4c6761f5cffcd11d860#rd';
                             })
 }
 function shareTimeline() {
@@ -128,7 +129,7 @@ document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
         // 发送给好友
         WeixinJSBridge.on('menu:share:appmessage', function(argv){
             shareFriend();
-			location.href='http://mp.weixin.qq.com/s?__biz=MjM5NzE5MDIyMQ==&mid=200446831&idx=1&sn=a745b72b64cca4c6761f5cffcd11d860#rd';
+			
             });
         // 分享到朋友圈
         WeixinJSBridge.on('menu:share:timeline', function(argv){
